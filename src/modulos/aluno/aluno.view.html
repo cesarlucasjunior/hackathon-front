@@ -153,7 +153,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
-        <div ng-controller="AlunoController" ng-submit="addMochila(mochila, editMochila)" class="modal-body">
+        <div ng-controller="AlunoController" ng-submit="addMochila(mochila, editMochila)" class="modal-body" name="mochilaForm">
           <form class="form-horizontal">
 
               <div class="form-group">
@@ -163,16 +163,20 @@
                 </div>
               </div>
               <input type="hidden" ng-model="editMochila.id">
+              <input type="hidden" ng-show="editMochila.mochilas.length < 6">
 
               <div class="form-group">
                 <label class="control-label col-sm-2">Mochila:</label>
                 <div class="col-sm-10">
-                  <input type="text" ng-model="mochila.marca" id="marca" class="form-control" name="marca" placeholder="Insira a mochila">
+                  <input type="text" ng-model="mochila.marca"  ng-disabled="editMochila.mochilas.length > 4" id="marca" class="form-control" name="marca" placeholder="Insira a mochila">
                 </div>
               </div>
+
+              <div ng-show="editMochila.mochilas.length > 4" class="alert alert-danger">Um aluno só pode ter, no máximo, 5 mochilas!</div>
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button class="btn btn-info" type="submit" name="submit">Enviar</button>
+                <button class="btn btn-info" type="submit" name="submit" ng-disabled="editMochila.mochilas.length > 4">Enviar</button>
               </div>    
             </form>    
 
