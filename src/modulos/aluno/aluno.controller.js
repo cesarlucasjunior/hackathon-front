@@ -11,11 +11,13 @@ export default class AlunoController{
         vm.alunos = resp.data;
       });
     }
-    $scope.addAluno = function(aluno, $scope){
-      console.log("Entrou na controller -" + aluno.nome);
+    $scope.addAluno = function(aluno){
       alunoService.setAluno(aluno).then(function api(resp){
         location.reload();
-      });
+      }).catch(function(error){
+        //alert("Usuário com mesmo nome!");      
+        $scope.alunoForm.erro = 1;
+      })
     }
 
     $scope.selectAluno = function(aluno){
